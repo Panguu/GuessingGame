@@ -34,3 +34,40 @@ const checkGuess = function (playerGuess, correctNumber) {
   }
   return "Correct! 🎉";
 };
+
+
+function calculateScore(counter) {
+  let score = 100 - counter * 10;
+  if (score < 0) score = 0;
+  return score;
+}
+
+function guessingGame() {
+  const rand = generateRandomNumber(); 
+  let counter = 0; 
+  let result = false; 
+
+  for (counter; counter < 10; counter++) {
+    const guess = getPlayerGuess(); 
+    const check = checkGuess(guess, rand); 
+    
+    if (check === "Correct! 🎉") {
+      result = true; 
+      break; 
+    } else if (check === "Too low! 😜") {
+      alert("Too low! 😜");
+    } else {
+      alert("Too high! 😜");
+    }
+  }
+
+  const score = calculateScore(counter);  
+  if (result) {
+    alert("You win! 🎉 Your score is " + score);
+  } else {
+    alert("You lost. The correct number was " + rand);
+  }
+}
+
+
+guessingGame() ; 
