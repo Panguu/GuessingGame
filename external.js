@@ -1,12 +1,12 @@
 function generateRandomNumber() {
-  return Math.floor(Math.random() * 100 + 1);
+  return Math.floor((Math.random() * 100) + 1);
 }
 
-const getPlayerGuess = function () {
+function getPlayerGuess() {
   let guess;
   while (true) {
     guess = prompt(
-      "Welcome Player 😎! Please enter an integer between 1 and 100:"
+      "Welcome Player \u{1F60E}! Please enter an integer between 1 and 100:"
     );
     const numberGuess = Number(guess);
 
@@ -19,20 +19,20 @@ const getPlayerGuess = function () {
       return numberGuess;
     } else {
       alert(
-        "Wrong input 😵! Please enter a integer between 1 and 100. No '.' or ',' will be accepted"
+        "Wrong input \u{1F635}! Please enter a integer between 1 and 100. No '.' or ',' will be accepted"
       );
     }
   }
 };
 
-const checkGuess = function (playerGuess, correctNumber) {
+function checkGuess(playerGuess, correctNumber) {
   if (playerGuess > correctNumber) {
-    return "Too high!😝";
+    return "Too high! \u{1F61B}";
   }
   if (playerGuess < correctNumber) {
-    return "Too low! 😜";
+    return "Too low! \u{1F61F}";
   }
-  return "Correct! 🎉";
+  return "Correct! \u{1F389}";
 };
 
 
@@ -42,32 +42,23 @@ function calculateScore(counter) {
   return score;
 }
 
-function guessingGame() {
+function game() {
   const rand = generateRandomNumber(); 
   let counter = 0; 
-  let result = false; 
 
-  for (counter; counter < 10; counter++) {
+  for (; counter < 10; counter++) {
     const guess = getPlayerGuess(); 
     const check = checkGuess(guess, rand); 
     
-    if (check === "Correct! 🎉") {
-      result = true; 
-      break; 
-    } else if (check === "Too low! 😜") {
-      alert("Too low! 😜");
-    } else {
-      alert("Too high! 😜");
-    }
+    if (check.includes("Correct!")) {
+      alert("You win! \u{1F389} Your score is " + calculateScore(counter));
+      return;
+    } 
+    alert(check);
   }
+  alert("You lost. \u{1F635} The correct number was " + rand);
 
-  const score = calculateScore(counter);  
-  if (result) {
-    alert("You win! 🎉 Your score is " + score);
-  } else {
-    alert("You lost. The correct number was " + rand);
-  }
 }
 
 
-guessingGame() ; 
+game();
